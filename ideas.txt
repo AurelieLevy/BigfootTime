@@ -1,6 +1,6 @@
 ## BIGFOOT ##
 
-- alcool
+- alcool (1942-2017)
 	- consommation
 	- lieux
 
@@ -9,8 +9,20 @@
 - Théories sur bigfoot
 	- les plus vieux/récents histoires
 - photos, sons, vidéos, enregistrements d'appel au secours
-- côté culturel (peintures, livres, ...) + tourisme
+- côté culturel (peintures, livres, ...) + tourisme + éducation
 	- recherches sérieuses
+- taux de population
+- via météo 
+https://daac.ornl.gov/cgi-bin/dataset_lister.pl?p=1
+http://www.bfro.net/gdb/
+http://onlinelibrary.wiley.com/doi/10.1111/j.1365-2699.2009.02152.x/full
+http://plotkml.r-forge.r-project.org/bigfoot.html
+https://thefisheriesblog.com/2016/04/04/bigfoot-teaches-statistics/
+http://www.theblaze.com/news/2013/09/19/92-years-of-bigfoot-sightings-on-one-map-by-someone-who-isnt-even-buying-the-myth/
+https://github.com/timothyrenner/bigfoot-dash-app
+http://onlinelibrary.wiley.com/doi/10.1111/j.1365-2699.2009.02152.x/abstract
+
+
 	
 ## UFO ##
 
