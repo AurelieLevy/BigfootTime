@@ -1,0 +1,9 @@
+table{
+    color: #A8B4B2;
+    border-collapse: collapse; 
+}
+
+table, th, td {
+    border: 1px solid #A8B4B2;
+    border-color: #A8B4B2;
+}
