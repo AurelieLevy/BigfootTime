@@ -12,3 +12,23 @@ table, th, td {
     padding-bottom: 40px;
     padding-top: 40 px;
 }
+
+#information {
+    background-color: #AAA;
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+#information p {
+    color:#333;
+    font-size: 24px;
+    text-align: justify;
+}
+
+#information p:first-child:first-letter{
+    float: left;
+    font-size: 270%;
+    padding-right: 10px;
+    padding-top: 15px;
+    text-transform: capitalize;
+}
