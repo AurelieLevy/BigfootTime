@@ -138,6 +138,13 @@ a:after {
 	letter-spacing: 1px;	
 }
 
+#f h4 {
+	color: white;
+	font-size: 24px;
+	font-weight: 700;
+	letter-spacing: 1px;
+}
+
 #f i {
 	font-size: 8px;
 	color: #fff;
