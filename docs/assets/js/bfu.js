@@ -1,5 +1,7 @@
 let bfuMap = d3.select("#bfuMap");
 let bfuBar = d3.select("#bfuBar");
+let religiousMap = d3.select("#religiousMap");
+let toolTip = d3.selectAll(".toolTip");
 let projection = d3.geoAlbersUsa();
 projection.scale(1270, 1270);
 projection.translate([480, 300]);
@@ -12,20 +14,22 @@ let barClicked = null;
 
 // The file loaded here is already projected with a d3.GeoAlbersUSA Projection
 d3.json("data/us.json", function (error, us) {
+    function loadMapInSvg(bfuMap) {
+        bfuMap.append("path")
+            .attr("stroke", "#303635")
+            .attr("stroke-width", 0.5)
+            .attr("d", path(topojson.mesh(us, us.objects.counties, function (a, b) { return a !== b && (a.id / 1000 | 0) === (b.id / 1000 | 0); })));
 
-    bfuMap.append("path")
-        .attr("stroke", "#303635")
-        .attr("stroke-width", 0.5)
-        .attr("d", path(topojson.mesh(us, us.objects.counties, function (a, b) { return a !== b && (a.id / 1000 | 0) === (b.id / 1000 | 0); })));
+        bfuMap.append("path")
+            .attr("stroke", "#AAA")
+            .attr("stroke-width", 0.5)
+            .attr("d", path(topojson.mesh(us, us.objects.states, function (a, b) { return a !== b; })));
 
-    bfuMap.append("path")
-        .attr("stroke", "#AAA")
-        .attr("stroke-width", 0.5)
-        .attr("d", path(topojson.mesh(us, us.objects.states, function (a, b) { return a !== b; })));
+        bfuMap.append("path")
+            .attr("stroke", "#AAA")
+            .attr("d", path(topojson.feature(us, us.objects.nation)));
+    }
 
-    bfuMap.append("path")
-        .attr("stroke", "#AAA")
-        .attr("d", path(topojson.feature(us, us.objects.nation)));
 
     // Linking to geojson
     d3.json("data/bfru.geojson", function (error, bf) {
@@ -50,6 +54,7 @@ d3.json("data/us.json", function (error, us) {
 
         // Using crossFilter ------------------
         let cf = crossfilter(bf.features);
+
         let all = cf.groupAll();
 
         let yearlyDimension = cf.dimension(function (d) {
@@ -58,6 +63,7 @@ d3.json("data/us.json", function (error, us) {
 
         let yearlyGroup = yearlyDimension.group();
         let yearlyValues = yearlyGroup.all();
+
 
         function refresh() {
             // Creating bar chart -----
@@ -99,7 +105,9 @@ d3.json("data/us.json", function (error, us) {
                     }
                     return "#777";
                 })
-                .on("click", handleBarClick);
+                .on("click", handleBarClick)
+                .on("mousemove", handleBarMove)
+                .on("mouseout", handleBarOut);
 
             gBar.append("g")
                 .attr("transform", "translate(0," + height + ")")
@@ -149,6 +157,10 @@ d3.json("data/us.json", function (error, us) {
 
         refresh();
     });
+
+    // Loading the 2 maps
+    loadMapInSvg(bfuMap);
+    loadMapInSvg(religiousMap);
 });
 
 function handleMouseOver(d, i) {
@@ -169,5 +181,20 @@ function handleMouseOut(d, i) {
     d3.select(this)
         .attr("fill", null)
         .attr("r", "3px");
+}
+
+
+function handleBarMove(bar, i) {
+    console.log("mouse moved");
+    toolTip
+        .style("left", d3.event.pageX - 15 + "px")
+        .style("top", d3.event.pageY - 40 + "px")
+        .style("display", "inline-block")
+        .html(bar.value);
+}
+
+function handleBarOut(bar, i) {
+    toolTip
+        .style("display", "none");
 }
 
