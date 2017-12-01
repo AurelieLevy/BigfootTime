@@ -69,7 +69,6 @@ d3.json("data/us.json", function (error, us) {
         let statelyGroup = statelyDimension.group();
         let statelyValues = statelyGroup.all();
 
-
         function refreshBFUMap() {
             // Creating bar chart -----
             let margin = 50,
@@ -87,7 +86,6 @@ d3.json("data/us.json", function (error, us) {
                 yearlyDimension.filter(barClicked.key);
             }
             let valuesFiltered = yearlyDimension.top(Infinity);
-
 
             xScale.domain(yearlyValues.map(function (d) { return d.key; }));
             yScale.domain([0, d3.max(yearlyValues, function (d) { return d.value; })]);
@@ -139,6 +137,99 @@ d3.json("data/us.json", function (error, us) {
                 .on("mouseout", handleMouseOut);
         }
 
+        // Loading the religious map
+        d3.csv("data/religious.csv", function (error, rel) {
+            if (error) throw error;
+
+            // Making an "hashmap" by state
+            let byState = {};
+            rel.forEach(function (d) {
+                byState[d.STNAME] = d;
+            });
+
+
+            // RELIGIOUS MAP
+            let ramp = d3.scaleLinear().domain([270, 800]).range(["#d5d8dc", "#566573"]);
+            religiousMap.selectAll(".state")
+                .data(us.features)
+                .enter().append("path")
+                .attr("stroke", "#777")
+                .attr("stroke-width", 0.5)
+                .attr("class", "state")
+                .attr("fill", function (s) {
+                    // Getting the value and chosing apropriated color
+                    // The value is from 0 to 1000
+                    let value = byState[s.properties.NAME];
+                    // console.log(s.properties.NAME + ": " + value.TOTRATE);
+                    return ramp(value.TOTRATE);
+
+                })
+                .attr("d", d3.geoPath().projection(projection));
+
+            // ------------- Loading bars
+            // Finding the center of each state
+            let stateCenters = {};
+            religiousMap.selectAll(".state")
+                .each(function (s) {
+                    let stateName = s.properties.NAME;
+
+                    // Storing the center
+                    stateCenters[stateName] = projection(path.centroid(s));
+                });
+
+            // Adding bars
+            // Loading the population of each state to have relative number of BF seen
+            d3.csv("data/population.csv", function (error, pop) {
+                if (error) throw error;
+
+                // Making a "Hashmap"
+                let popMap = {};
+                pop.forEach(function (p) {
+                    popMap[p.STNAME] = p;
+                });
+
+                console.log(popMap);
+
+                // Adding relative number of BF seen by state
+                // Relative: bf seen per milion of inhabitant
+                let unitHeight = 2;
+                statelyValues.forEach(function (s) {
+                    console.log(s);
+                    console.log(popMap);
+                    s.relativeBFSeen = s.value / popMap[s.key].TOTPOP;
+                    s.relativeSize = s.relativeBFSeen * unitHeight;
+                });
+
+                console.log(stateCenters);
+                console.log(statelyValues);
+                religiousMap.selectAll(".bar")
+                    .data(statelyValues)
+                    .enter().append("rect")
+                    .attr("x", s => stateCenters[s.key][0])
+                    .attr("y", s => stateCenters[s.key][1] - s.relativeSize)
+                    .attr("height", (s) => s.relativeSize)
+                    .attr("width", 10)
+                    .attr("fill", "#777")
+                    .attr("fill-opacity", 0.7)
+                    .attr("class", "bar");
+            });
+
+
+
+
+            /*
+            religiousMap.append("path")
+                .attr("stroke", "#AAA")
+                .attr("stroke-width", 0.5)
+                .attr("fill", (d) => "blue")
+                .attr("d", path(topojson.mesh(us, us.objects.states, function (a, b) { return a !== b; })));
+    
+            religiousMap.append("path")
+                .attr("stroke", "#AAA")
+                .attr("d", path(topojson.feature(us, us.objects.nation)));
+                //*/
+        });
+
         function handleBarClick(b, i) {
             // We firstly have to unfilter everything
             bfuBar.selectAll(".bar")
@@ -156,47 +247,7 @@ d3.json("data/us.json", function (error, us) {
         refreshBFUMap();
     });
 
-    // Loading the religious map
-    d3.csv("data/religious.csv", function (error, rel) {
-        if (error) throw error;
 
-        // Making an "hashmap" by state
-        let byState = {};
-        rel.forEach(function (d) {
-            byState[d.STNAME] = d;
-        });
-
-
-        // RELIGIOUS MAP
-        let ramp = d3.scaleLinear().domain([270, 800]).range(["#d5d8dc", "#566573"]);
-        religiousMap.selectAll(".state")
-            .data(us.features)
-            .enter().append("path")
-            .attr("stroke", "#777")
-            .attr("stroke-width", 0.5)
-            .attr("class", "state")
-            .attr("fill", function (s) {
-                // Getting the value and chosing apropriated color
-                // The value is from 0 to 1000
-                let value = byState[s.properties.NAME];
-                console.log(s.properties.NAME + ": " + value.TOTRATE);
-                return ramp(value.TOTRATE);
-
-            })
-            .attr("d", d3.geoPath().projection(projection));
-
-        /*
-        religiousMap.append("path")
-            .attr("stroke", "#AAA")
-            .attr("stroke-width", 0.5)
-            .attr("fill", (d) => "blue")
-            .attr("d", path(topojson.mesh(us, us.objects.states, function (a, b) { return a !== b; })));
-
-        religiousMap.append("path")
-            .attr("stroke", "#AAA")
-            .attr("d", path(topojson.feature(us, us.objects.nation)));
-            //*/
-    });
 });
 
 function handleMouseOver(d, i) {
