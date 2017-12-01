@@ -141,18 +141,11 @@ d3.json("data/us.json", function (error, us) {
 
             if (barClicked == b) { // Have to unfilter
                 barClicked = null;
-
-                refresh();
-                d3.select(this)
-                    .attr("fill", "#777");
             } else { // Filter
                 barClicked = b;
-
-                refresh();
-                d3.select(this)
-                    .attr("fill", "blue");
             }
 
+            refresh();
         }
 
         refresh();
@@ -185,7 +178,6 @@ function handleMouseOut(d, i) {
 
 
 function handleBarMove(bar, i) {
-    console.log("mouse moved");
     toolTip
         .style("left", d3.event.pageX - 15 + "px")
         .style("top", d3.event.pageY - 40 + "px")
