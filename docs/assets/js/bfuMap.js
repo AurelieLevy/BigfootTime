@@ -61,9 +61,9 @@ d3.json("data/us.json", function (error, us) {
 
         function refresh() {
             // Creating bar chart -----
-            let margin = 0,
-                width = bfuBar.node().getBoundingClientRect().width - margin,
-                height = bfuBar.node().getBoundingClientRect().height - margin
+            let margin = 50,
+                width = 960 - margin,
+                height = 300 - margin
 
             let xScale = d3.scaleBand().range([0, width]).padding(0.4),
                 yScale = d3.scaleLinear().range([height, 0]);
@@ -81,8 +81,10 @@ d3.json("data/us.json", function (error, us) {
             xScale.domain(yearlyValues.map(function (d) { return d.key; }));
             yScale.domain([0, d3.max(yearlyValues, function (d) { return d.value; })]);
 
+            // Firtsly, removing every bars on refresh()
             gBar.selectAll(".bar")
                 .remove();
+            // Adding the new bars 
             gBar.selectAll(".bar")
                 .data(yearlyValues)
                 .enter().append("rect")
@@ -92,12 +94,22 @@ d3.json("data/us.json", function (error, us) {
                 .attr("width", xScale.bandwidth())
                 .attr("height", function (d) { return height - yScale(d.value); })
                 .attr("fill", function (d) {
-                    if(barClicked != null){
+                    if (barClicked != null) {
                         return d.key == barClicked.key ? "blue" : "#777";
                     }
                     return "#777";
                 })
                 .on("click", handleBarClick);
+
+            gBar.append("g")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(xScale))
+                .selectAll("text")
+                .style("text-anchor", "end")
+                .attr("dx", "-.8em")
+                .attr("dy", ".15em")
+                .attr("transform", "rotate(-65)");
+            ;
 
 
             // Drawing circle -----------------
