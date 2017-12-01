@@ -160,7 +160,30 @@ d3.json("data/us.json", function (error, us) {
     d3.csv("data/religious.csv", function (error, rel) {
         if (error) throw error;
 
+        // Making an "hashmap" by state
+        let byState = {};
+        rel.forEach(function (d) {
+            byState[d.STNAME] = d;
+        });
+
+
         // RELIGIOUS MAP
+        let ramp = d3.scaleLinear().domain([270, 800]).range(["#d5d8dc", "#566573"]);
+        religiousMap.selectAll(".state")
+            .data(us.features)
+            .enter().append("path")
+            .attr("stroke", "#777")
+            .attr("stroke-width", 0.5)
+            .attr("class", "state")
+            .attr("fill", function (s) {
+                // Getting the value and chosing apropriated color
+                // The value is from 0 to 1000
+                let value = byState[s.properties.NAME];
+                console.log(s.properties.NAME + ": " + value.TOTRATE);
+                return ramp(value.TOTRATE);
+
+            })
+            .attr("d", d3.geoPath().projection(projection));
 
         /*
         religiousMap.append("path")
