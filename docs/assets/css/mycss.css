@@ -33,4 +33,12 @@ table, th, td {
     text-transform: capitalize;
 }
 
-
+.toolTip {
+    position: absolute;
+    display: none;
+    min-width: 30px;
+    height: auto;
+    background: none repeat scroll 0 0 #DDD;
+    padding: 2px;
+    text-align: center;
+  } 
