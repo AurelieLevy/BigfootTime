@@ -273,6 +273,3 @@ function showTooltip(str) {
 function hideTooltip(){
     toolTip.style("display", "none");
 }
-
-
-

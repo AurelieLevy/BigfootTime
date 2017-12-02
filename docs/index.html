@@ -22,7 +22,12 @@
 
 	<link href='assets/css/oswald.css' rel='stylesheet' type='text/css'>
 	<link href='assets/css/EB.css' rel='stylesheet' type='text/css'>
-
+	<script type="text/javascript" src="assets/js/snow.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			snow.init(90); // 10 flocons seront donc affichés
+		};
+	</script>
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
       <script src="assets/js/html5shiv.js"></script>
@@ -39,7 +44,6 @@
 			</h1>
 			<i class="icon-remove menu-close"></i>
 			<a href="#about" class="smoothScroll">About</a>
-			<a href="#portfolio" class="smoothScroll">Portfolio</a>
 			<a href="#contact" class="smoothScroll">Contact</a>
 			<a href="#">
 				<i class="icon-facebook"></i>
@@ -50,7 +54,7 @@
 			<a href="#">
 				<i class="icon-dribbble"></i>
 			</a>
-			<a href="#">
+			<a href="#contact">
 				<i class="icon-envelope"></i>
 			</a>
 		</div>
@@ -260,6 +264,7 @@
 			<!-- row -->
 
 
+
 			<div class="row centered" style="margin-top:20px;">
 				<h3>Think on your Bigfoot</h3>
 				<p>
@@ -269,6 +274,45 @@
 					<br> By concentrating our researches on the USA, we have obtained a lot of testimonies and reports. You will find some of
 					them in the next content.
 				</p>
+
+				<h4>A Big foot in both camps</h4>
+				<table style="width: 600px; height: 40px; margin-top: 50px; margin-bottom: 50px;">
+					<tbody>
+						<tr>
+							<td style="background-color:#566573; width: 24px; height:24px; border-width:1px; border-color: black; border-style:solid;">
+							</td>
+							<td style="width:100px;">
+								<code style="background-color: transparent; color:lightpink">
+								Very religous
+							  </code>
+							</td>
+							<td style="background-color:#9098a2; width: 24px; height:24px; border-width:1px; border-color: black; border-style:solid;">
+							</td>
+							<td style="width:100px;">
+								<code style="background-color: transparent; color:lightpink">
+								  Moderately religious
+								</code>
+							</td>
+							<td style="background-color:#d5d8dc; width: 24px; height:24px; border-width:1px; border-color: black; border-style:solid;">
+							</td>
+							<td style="width:100px;">
+								<code style="background-color: transparent; color:lightpink">
+									Not religious
+								</code>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="row centered" style="margin-top:20px;">
+					<svg viewBox="0 -80 960 700" class="col-lg-12" id="religiousMap" style="width:100%; height:auto;" fill="none" stroke="#AAA"
+					 stroke-linejoin="round" stroke-linecap="round"></svg>
+				</div>
+				<p>
+
+				</p>
+
+				<h4>Put one Big foot on the other</h4>
+
 				<svg viewBox="0 0 910 300" class="col-lg-12" id="bfuBar" style="width:100%; height:auto;" fill="#777" stroke="#AAA"></svg>
 				<svg viewBox="0 0 960 600" class="col-lg-12" id="bfuMap" style="width:100%; height:auto;" fill="none" stroke="#AAA" stroke-linejoin="round"
 				 stroke-linecap="round"></svg>
@@ -279,10 +323,9 @@
 					</div>
 				</div>
 
-				<h4>Put one Big foot on the other</h4>
 				<p>
-					As you can see with the bar chart by clicking on it to filter the outputs, there was a increasing number of testimonies in the year 2004. One of the major reason
-					is because of George Bush.
+					As you can see with the bar chart by clicking on it to filter the outputs, there was a increasing number of testimonies in
+					the year 2004. One of the major reason is because of George Bush.
 					<br> "Wait, what?" is certainly your response, and I answer you "Hell yeah!".
 					<br> In fact, the 2 november 2004 was the day when George W. Bush was re-elected for a second four-year term. And one of
 					his principle concern was about the terrorism. One of the biggest decision that he took was to do an army named BHDF:
@@ -295,14 +338,10 @@
 					this hypothesis could be true at some point... Indeed, some social interactions and reactions of Mr. Bush can be clearly
 					compared to what we have observed from bigfoot. Here is one really speaking image:
 					<img style="padding-top: 50px; padding-bottom: 50px; width:100%; height:auto;" src="resources/images/bigfoot-bush-monkey.jpg"
-					 alt="Bush and bigfoot">
+					 alt="Bush and bigfoot"> So, we have the right to ask ourselves if G.W. Bush is not a representative of the Sasquatch people and he is there
+					to prepare our two folks to meet ...
+					<br> It would explain a lot, don't you think?
 				</p>
-			</div>
-
-
-			<div class="row centered" style="margin-top:20px;">
-				<svg viewBox="0 -80 960 700" class="col-lg-12" id="religiousMap" style="width:100%; height:auto;" fill="none" stroke="#AAA"
-				 stroke-linejoin="round" stroke-linecap="round"></svg>
 			</div>
 
 			<div class="row centered">
@@ -382,6 +421,7 @@
 	<script src="assets/js/d3.tip.v0.6.3.js"></script>
 	<script src="assets/js/crossfilter.min.js"></script>
 	<script src="assets/js/bfu.js"></script>
+	<script src="assets/js/konamiStyle.js"></script>
 
 </body>
 
