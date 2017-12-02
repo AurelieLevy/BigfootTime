@@ -188,7 +188,7 @@ d3.json("data/us.json", function (error, us) {
                     popMap[p.STNAME] = p;
                 });
 
-                console.log(popMap);
+                // console.log(popMap);
 
                 // Adding relative number of BF seen by state
                 // Relative: bf seen per milion of inhabitant
@@ -199,8 +199,8 @@ d3.json("data/us.json", function (error, us) {
                     s.religiousRate = byState[s.key].TOTRATE;
                 });
 
-                console.log(stateCenters);
-                console.log(statelyValues);
+                // console.log(stateCenters);
+                // console.log(statelyValues);
                 religiousMap.selectAll(".bar")
                     .data(statelyValues)
                     .enter().append("rect")
