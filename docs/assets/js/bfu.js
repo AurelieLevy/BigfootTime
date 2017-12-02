@@ -109,8 +109,10 @@ d3.json("data/us.json", function (error, us) {
                     return "#777";
                 })
                 .on("click", handleBarClick)
-                .on("mousemove", handleBarMove)
-                .on("mouseout", handleBarOut);
+                .on("mousemove", function (bar, i) {
+                    showTooltip(bar.value);
+                })
+                .on("mouseout", hideTooltip);
 
             gBar.append("g")
                 .attr("transform", "translate(0," + height + ")")
@@ -137,7 +139,7 @@ d3.json("data/us.json", function (error, us) {
                 .on("mouseout", handleMouseOut);
         }
 
-        // Loading the religious map
+        // ------------- Loading the religious map
         d3.csv("data/religious.csv", function (error, rel) {
             if (error) throw error;
 
@@ -160,9 +162,7 @@ d3.json("data/us.json", function (error, us) {
                     // Getting the value and chosing apropriated color
                     // The value is from 0 to 1000
                     let value = byState[s.properties.NAME];
-                    // console.log(s.properties.NAME + ": " + value.TOTRATE);
                     return ramp(value.TOTRATE);
-
                 })
                 .attr("d", d3.geoPath().projection(projection));
 
@@ -194,10 +194,9 @@ d3.json("data/us.json", function (error, us) {
                 // Relative: bf seen per milion of inhabitant
                 let unitHeight = 2;
                 statelyValues.forEach(function (s) {
-                    console.log(s);
-                    console.log(popMap);
                     s.relativeBFSeen = s.value / popMap[s.key].TOTPOP;
                     s.relativeSize = s.relativeBFSeen * unitHeight;
+                    s.religiousRate = byState[s.key].TOTRATE;
                 });
 
                 console.log(stateCenters);
@@ -211,23 +210,17 @@ d3.json("data/us.json", function (error, us) {
                     .attr("width", 10)
                     .attr("fill", "#777")
                     .attr("fill-opacity", 0.7)
-                    .attr("class", "bar");
+                    .attr("class", "bar")
+                    .on("mousemove", function (s, i) {
+                        showTooltip("# of Bigfoot seen: " + s.value + "<br/>" +
+                                    "# of BF seen for 1 million inhabitant: " + s.relativeBFSeen + "<br/>" +
+                                    "Religious rate for 1 million inhabitant: " + s.religiousRate);
+                    })
+                    .on("mouseout", function (s, i){
+                        hideTooltip();
+                    });
             });
 
-
-
-
-            /*
-            religiousMap.append("path")
-                .attr("stroke", "#AAA")
-                .attr("stroke-width", 0.5)
-                .attr("fill", (d) => "blue")
-                .attr("d", path(topojson.mesh(us, us.objects.states, function (a, b) { return a !== b; })));
-    
-            religiousMap.append("path")
-                .attr("stroke", "#AAA")
-                .attr("d", path(topojson.feature(us, us.objects.nation)));
-                //*/
         });
 
         function handleBarClick(b, i) {
@@ -270,16 +263,16 @@ function handleMouseOut(d, i) {
         .attr("r", "3px");
 }
 
-
-function handleBarMove(bar, i) {
+function showTooltip(str) {
     toolTip
         .style("left", d3.event.pageX - 15 + "px")
-        .style("top", d3.event.pageY - 40 + "px")
+        .style("top", d3.event.pageY - 80 + "px")
         .style("display", "inline-block")
-        .html(bar.value);
+        .html(str);
 }
-
-function handleBarOut(bar, i) {
+function hideTooltip(){
     toolTip.style("display", "none");
 }
+
+
 
