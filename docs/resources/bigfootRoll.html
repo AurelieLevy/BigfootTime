@@ -50,7 +50,13 @@
             </div>
             <!-- row -->
             <h4>
-                <a href="../../docs/index.html" style="color:gray">I want to come back</a>
+                <button onclick="goBack()">I want to come back</button>
+
+                <script>
+                    function goBack() {
+                        window.history.back();
+                    }
+                </script>
             </h4>
         </div>
         <!-- /container -->
