@@ -19,6 +19,15 @@
     <link rel="stylesheet" href="../assets/css/mycss.css">
 
     <script src="../assets/js/jquery.min.js"></script>
+
+    <link href='../assets/css/oswald.css' rel='stylesheet' type='text/css'>
+    <link href='../assets/css/EB.css' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="../assets/js/snow.js"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            snow.init(90); // 10 flocons seront donc affichés
+        };
+    </script>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="../assets/js/html5shiv.js"></script>
@@ -27,7 +36,9 @@
 </head>
 
 <body data-spy="scroll" data-offset="0" data-target="#theMenu">
-    <div id="f">
+    <!-- ========== HEADER SECTION ========== -->
+    <section id="home" name="home"></section>
+    <div id="headerwrap">
         <div class="container">
             <div class="row centered">
                 <h3>Oups, We did it again</h3>
@@ -42,19 +53,11 @@
                 <a href="../../docs/index.html" style="color:gray">I want to come back</a>
             </h4>
         </div>
-        <!-- container -->
+        <!-- /container -->
     </div>
 
-    <footer>
-        <div id="f">
-            <div class="container">
-                <p style="text-align: left; font-size: 10px;">
-                    This site is not to be taken seriously. It was done as part of a laboratory and is representative of nothing at all ...
-                </p>
-            </div>
-
-        </div>
-    </footer>
+    <!-- Tooltip -->
+    <div class="toolTip"></div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -68,6 +71,8 @@
     <script src="../assets/js/topojson.v1.min.js"></script>
     <script src="../assets/js/d3.tip.v0.6.3.js"></script>
     <script src="../assets/js/crossfilter.min.js"></script>
+    <script src="../assets/js/bfu.js"></script>
+    <script src="../assets/js/konamiStyle.js"></script>
 
 </body>
 
