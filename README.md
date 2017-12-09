@@ -4,6 +4,9 @@
  </p>
 
 ## Informations
+You can find our web pages here: https://aurelielevy.github.io/BigfootTime/
+<br>
+<br>
 This projet was made as part of a laboratory for the course named TWEB (HEIG-VD).
 It's about the Bigfoot. We've used some datas to create charts with D3. The goal was firstly to learn to use it. In any case the informations we give are not to take seriously! The datas we used are findable on the web (see the part name Data in this file)
 Our goal was to make something funny, and we used some informations that are not verified.
