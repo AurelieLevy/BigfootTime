@@ -12,11 +12,20 @@ It's about the Bigfoot. We've used some datas to create charts with D3. The goal
 Our goal was to make something funny, and we used some informations that are not verified.
 
 ## Data
-All the data used about the bigfoot where found here:
-* https://data.world/timothyrenner/bfro-sightings-data
-* //TODO
+You can find the data we used under the "docs/data" of this project. These data are publicly avaiable on internet, and can be found there:
+* Bigfoot reports with location and time
+    * Direct download: https://raw.githubusercontent.com/AurelieLevy/BigfootTime/master/docs/data/bfru.geojson
+    * Source: https://data.world/timothyrenner/bfro-sightings-data
+* Population by USA state
+    * Direct download: https://raw.githubusercontent.com/AurelieLevy/BigfootTime/master/docs/data/population.csv
+    * Source: https://www.google.ch/publicdata/explore?ds=kf7tgg1uo9ude_&met_y=population&hl=en&dl=en
+* Religion rate by USA state
+    * Direct download: https://raw.githubusercontent.com/AurelieLevy/BigfootTime/master/docs/data/religious.csv
+    * Source: http://www.thearda.com/Archive/Files/Descriptions/RCMSST.asp
+* USA map (geojson):
+    * Direct download: https://raw.githubusercontent.com/AurelieLevy/BigfootTime/master/docs/data/us.json
 
-A major part of those datas where recolted by "The Bigfoot Field Researchers Organization" founded in 1995. They allow you to report your sighting and ask you to describe it to keep their data updated.
+A major part of Bigfoot datas where recolted by "The Bigfoot Field Researchers Organization" founded in 1995. They allow you to report your sighting and ask you to describe it to keep their data updated.
 
 ## treatements of the data
 //TODO
